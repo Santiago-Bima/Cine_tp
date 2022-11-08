@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibreriaApi.Dominio;
 
 namespace LibreriaApi.Data
 {
@@ -35,6 +36,31 @@ namespace LibreriaApi.Data
             return dt;
         }
 
+        public List<Funcion> ObtenerFunciones()
+        {
+            List<Funcion> lst = new List<Funcion>();
+
+            DataTable t = new DataTable();
+            SqlCommand cmd = Conectar("Consultar_Lista_Funciones");
+            t.Load(cmd.ExecuteReader());
+            cnn.Close();
+
+            foreach (DataRow dr in t.Rows)
+            {
+                Funcion oFuncion = new Funcion();
+                oFuncion.IdFuncion = Convert.ToInt32(dr[0]);
+                oFuncion.IdPelicula = Convert.ToInt32(dr[3]);
+                oFuncion.Fecha = dr[2].ToString();
+                oFuncion.Horario = Convert.ToString(dr[1]);
+                oFuncion.IdSala = Convert.ToInt32(dr[5]);
+                oFuncion.IdFormato = Convert.ToInt32(dr[7]);
+                oFuncion.Precio = Convert.ToDouble(dr[10]);
+
+                lst.Add(oFuncion);
+            }
+
+            return lst;
+        }
         public int EjecutarSQL(string strSql, List<Parametro> values)
         {
             int afectadas = 0;

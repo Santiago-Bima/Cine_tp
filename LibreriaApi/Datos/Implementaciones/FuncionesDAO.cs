@@ -1,4 +1,5 @@
 ﻿using LibreriaApi.Data.Interfaces;
+using LibreriaApi.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,6 +19,11 @@ namespace LibreriaApi.Data.Implementaciones
         public int EjecutarSQL(string sp, List<Parametro> lParametros)
         {
             return HelperFuncionesDAO.ObtenerInstancia().EjecutarSQL(sp, lParametros);
+        }
+
+        public List<Funcion> ObtenerFunciones()
+        {
+            return HelperFuncionesDAO.ObtenerInstancia().ObtenerFunciones();
         }
     }
 }

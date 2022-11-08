@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibreriaApi.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace LibreriaApi.Data.Interfaces
     {
         DataTable ConsultarDB(string sp, List<Parametro> values);
         int EjecutarSQL(string sp, List<Parametro> lParametros);
+        List<Funcion> ObtenerFunciones();
     }
 }

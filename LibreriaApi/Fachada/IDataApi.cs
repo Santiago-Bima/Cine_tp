@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibreriaApi.Data;
+using LibreriaApi.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,7 @@ namespace LibreriaApi.Fachada
 {
     public interface IDataApi
     {
+        public List<Funcion> GetFunciones();
+        public int SaveFuncion(List<Parametro> lParametros);
     }
 }
