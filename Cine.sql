@@ -265,7 +265,6 @@ as
 
 
 
-
 create proc Consultar_Lista_Funciones
 as
 select id_funcion, hora, fecha, p.id_pelicula, titulo,s.id_sala, sala, f.id_formato, formato, idioma, precio
@@ -300,6 +299,7 @@ create proc [dbo].[Insertar_Funciones]
 	@hora varchar(10)
 as
 	insert into funciones(fecha, precio, id_pelicula, id_sala, id_formato, hora) values(@fecha, @precio,@id_pelicula,@id_sala,@id_formato, @hora)
+
 
 	
 
