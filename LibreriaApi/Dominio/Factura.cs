@@ -15,6 +15,7 @@ namespace LibreriaApi.Dominio
         public double Descuento { get; set; }
         public double Total { get; set; }
         public List<Ticket> lTicket { get; set; }
+        public bool Baja { get; set; }
 
         public Factura()
         {
@@ -25,6 +26,7 @@ namespace LibreriaApi.Dominio
             Descuento = 0;
             Total = 0;
             lTicket = new List<Ticket>();
+            Baja = false;
         }
 
         public void AgregarTicket(Ticket t)

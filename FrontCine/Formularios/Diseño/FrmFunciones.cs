@@ -100,12 +100,17 @@ namespace FrontCine.Formularios.Diseño
 
         private void MostrarDatos(int posicion)
         {
-            dtpFechaHora.Value = Convert.ToDateTime(lFunciones[posicion].Fecha);
-            cboHorario.Text = lFunciones[posicion].Horario.ToString();
-            txtPrecio.Text = lFunciones[posicion].Precio.ToString();
-            cboPelicula.SelectedIndex = lFunciones[posicion].IdPelicula - 1 ;
-            cboSala.SelectedIndex = lFunciones[posicion].IdSala -1;
-            cboFormato.SelectedIndex = lFunciones[posicion].IdFormato - 1;
+            try
+            {
+
+                dtpFechaHora.Value = Convert.ToDateTime(lFunciones[posicion].Fecha);
+                cboHorario.Text = lFunciones[posicion].Horario.ToString();
+                txtPrecio.Text = lFunciones[posicion].Precio.ToString();
+                cboPelicula.SelectedIndex = lFunciones[posicion].IdPelicula - 1;
+                cboSala.SelectedIndex = lFunciones[posicion].IdSala - 1;
+                cboFormato.SelectedIndex = lFunciones[posicion].IdFormato - 1;
+            }
+            catch (Exception) { }
 
         }
         private void Limpiar()
@@ -254,11 +259,16 @@ namespace FrontCine.Formularios.Diseño
 
         private void lstFunciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MostrarDatos(lstFunciones.SelectedIndex);
-            btnEditar.Enabled = true;
-            btnEliminar.Enabled = true;
-            btnNuevo.Enabled = false;
-            btnCancelar.Enabled = true;
+            try
+            {
+
+                MostrarDatos(lstFunciones.SelectedIndex);
+                btnEditar.Enabled = true;
+                btnEliminar.Enabled = true;
+                btnNuevo.Enabled = false;
+                btnCancelar.Enabled = true;
+            }
+            catch (Exception) { }
         }
 
         private void cboPelicula_SelectedIndexChanged(object sender, EventArgs e)

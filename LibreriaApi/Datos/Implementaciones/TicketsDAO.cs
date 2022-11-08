@@ -30,5 +30,10 @@ namespace LibreriaApi.Data.Implementaciones
         {
             return HelperTicketsDAO.ObtenerInstancia().ConsultaEscalarSQL(sp, sPout);
         }
+
+        public int EjecutarSQL(string strSql, List<Parametro> values)
+        {
+            return HelperTicketsDAO.ObtenerInstancia().EjecutarSQL(strSql, values);
+        }
     }
 }

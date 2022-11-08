@@ -12,7 +12,7 @@ namespace LibreriaApi.Dominio
         public double Precio { get; set; }
         public Funcion Funcion { get; set; }
         public int Butaca { get; set; }
-        public bool Baja { get; set; }
+        
 
         public Ticket()
         {
@@ -20,7 +20,6 @@ namespace LibreriaApi.Dominio
             Precio = 0;
             Funcion = new Funcion();
             Butaca = 0;
-            Baja = false;
         }
     }
 }
