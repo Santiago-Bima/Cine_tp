@@ -70,17 +70,16 @@ namespace LibreriaApi.Data
             }
             return afectadas;
         }
-        public int EjecutarTransaccion(Factura oFactura, List<Parametro> values)
+        public bool EjecutarTransaccion(Factura oFactura, List<Parametro> values)
         {
-            int afectadas = 0;
+            bool ok = true;
             SqlTransaction t = null;
 
             try
             {
-                SqlCommand cmd = new SqlCommand();
                 cnn.Open();
+                SqlCommand cmd = new SqlCommand();
                 t = cnn.BeginTransaction();
-                cmd.Connection = cnn;
                 cmd = new SqlCommand("insertar_factura", cnn, t);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -91,13 +90,20 @@ namespace LibreriaApi.Data
                         cmd.Parameters.AddWithValue(param.Clave, param.Valor);
                     }
                 }
-                afectadas = cmd.ExecuteNonQuery();
+
+                SqlParameter pOut = new SqlParameter("@nro_factura", SqlDbType.Int);
+                pOut.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pOut);
+
+                cmd.ExecuteNonQuery();
+
+                int facturaNro = (int)pOut.Value;
 
                 foreach (Ticket ticket in oFactura.lTicket)
                 {
                     SqlCommand cmdTicket = new SqlCommand("Crear_Ticket", cnn, t);
                     cmdTicket.CommandType = CommandType.StoredProcedure;
-                    cmdTicket.Parameters.AddWithValue("@nro_factura", oFactura.IdFactura);
+                    cmdTicket.Parameters.AddWithValue("@nro_factura", facturaNro);
                     cmdTicket.Parameters.AddWithValue("@precio", ticket.Precio);
                     cmdTicket.Parameters.AddWithValue("@id_funcion", ticket.Funcion.IdFuncion);
                     cmdTicket.Parameters.AddWithValue("@id_butaca", ticket.Butaca);
@@ -106,16 +112,18 @@ namespace LibreriaApi.Data
 
                 t.Commit();
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                if (t != null) t.Rollback();
+
+                t.Rollback();
+                ok = false;
             }
             finally
             {
                 if (cnn != null && cnn.State == ConnectionState.Open)
                     cnn.Close();
             }
-            return afectadas;
+            return ok;
         }
 
         public int ConsultaEscalarSQL(string spNombre, string pOutNombre)

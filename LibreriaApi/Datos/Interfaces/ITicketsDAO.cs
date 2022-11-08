@@ -12,7 +12,7 @@ namespace LibreriaApi.Data.Interfaces
     {
         DataTable ConsultarDB(string sp, List<Parametro> values);
         int AaltaBaja(string sp, List<Parametro> lParamatros);
-        int EjecutarTransaccion(Factura oFactura, List<Parametro> values);
+        bool EjecutarTransaccion(Factura oFactura, List<Parametro> values);
         int ConsultaEscalarSQL(string sp, string sPout);
         public int EjecutarSQL(string strSql, List<Parametro> values);
     }

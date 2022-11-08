@@ -42,6 +42,7 @@ namespace FrontCine.Formularios.Diseño
         private void CargarListaFacturas()
         {
             lstFacturas.Items.Clear();
+            lFacturas.Clear();
             DataTable tabla = oDao.ConsultarDB("consultar_altafacturas",null);
 
             foreach (DataRow fila in tabla.Rows)
@@ -52,14 +53,14 @@ namespace FrontCine.Formularios.Diseño
                 lFacturas.Add(oFactura);
 
                 string baja;
-                if (fila["baja"].ToString() == "0x00")
+                if (Convert.ToInt32(fila[6]) == 1)
                 {
-                    baja = "si";
+                    baja = "De Baja";
                     oFactura.Baja = true;
                 }
                 else
                 {
-                    baja = "no";
+                    baja = "En Alta";
                     oFactura.Baja = false;
                 }
 
@@ -69,7 +70,7 @@ namespace FrontCine.Formularios.Diseño
                                         + "Descuento: $" + fila["descuento"] + " - "
                                         + "Total: $" + fila["total"] + " - "
                                         + "Fecha: " + fila["fecha"] + " - "
-                                        + "De Baja?: " + baja);
+                                        + "Estado: " + baja);
             }
         }
 
@@ -104,6 +105,7 @@ namespace FrontCine.Formularios.Diseño
 
             if (oDao.EjecutarSQL(nombreSp, lParametros) > 0 )
                 MessageBox.Show("Se ha podido actualizar la transaccion");
+
             CargarListaFacturas();
         }
 

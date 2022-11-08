@@ -21,7 +21,7 @@ namespace LibreriaApi.Data.Implementaciones
             return HelperTicketsDAO.ObtenerInstancia().AltaBaja(sp, lParametros);
         }
 
-        public int EjecutarTransaccion(Factura oFactura, List<Parametro> lParametros)
+        public bool EjecutarTransaccion(Factura oFactura, List<Parametro> lParametros)
         {
             return HelperTicketsDAO.ObtenerInstancia().EjecutarTransaccion(oFactura, lParametros);
         }

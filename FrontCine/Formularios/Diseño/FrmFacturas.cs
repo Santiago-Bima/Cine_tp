@@ -175,6 +175,7 @@ namespace FrontCine.Formularios.Diseño
             double precio = Convert.ToDouble(txtPrecio.Text);
 
             Funcion funcion = new Funcion();
+            funcion.IdFuncion = Convert.ToInt32(cboFunciones.SelectedValue);
             funcion.Fecha = txtFecha.Text;
             funcion.IdFormato = cboFormato.SelectedIndex;
             funcion.IdSala = cboSala.SelectedIndex;
@@ -195,6 +196,7 @@ namespace FrontCine.Formularios.Diseño
             CalcularCantTickets();
             cboFunciones.SelectedIndex = -1;
             cboButacas.SelectedIndex = -1;
+            cboButacas.Enabled = false;
         }
 
         private void CalcularCantTickets()
@@ -234,12 +236,12 @@ namespace FrontCine.Formularios.Diseño
         }
         private void GuardarTransaccion()
         {
-
+            oFactura.IdFactura = oDao.ConsultaEscalarSQL("consultar_proxFactura", "@id");
             oFactura.IdCliente = Convert.ToInt32(cboClientes.SelectedValue);
             oFactura.Fecha = txtFecha.Text;
             if (txtDescuento.Text.Equals(string.Empty)) oFactura.Descuento = 0;
             else oFactura.Descuento = Convert.ToDouble(txtDescuento.Text);
-            oFactura.IdFormaPago = cboFormasPago.SelectedIndex;
+            oFactura.IdFormaPago = Convert.ToInt32(cboFormasPago.SelectedValue);
 
             List<Parametro> lParametros = new List<Parametro>();
             lParametros.Add(new Parametro("@id_cliente", oFactura.IdCliente));
@@ -248,10 +250,11 @@ namespace FrontCine.Formularios.Diseño
             lParametros.Add(new Parametro("@descuento", oFactura.Descuento));
             lParametros.Add(new Parametro("@total", CalcularTotal()));
 
-            if (oDao.EjecutarTransaccion(oFactura, lParametros) > 0)
+            if (oDao.EjecutarTransaccion(oFactura, lParametros))
             {
                 MessageBox.Show("Transacción registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Dispose();
+                instancia = null;
+                Close();
             }
             else
             {

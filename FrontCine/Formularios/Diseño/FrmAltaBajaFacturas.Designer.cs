@@ -40,13 +40,13 @@
             this.lstFacturas.ItemHeight = 25;
             this.lstFacturas.Location = new System.Drawing.Point(34, 21);
             this.lstFacturas.Name = "lstFacturas";
-            this.lstFacturas.Size = new System.Drawing.Size(783, 529);
+            this.lstFacturas.Size = new System.Drawing.Size(1317, 379);
             this.lstFacturas.TabIndex = 0;
             this.lstFacturas.SelectedIndexChanged += new System.EventHandler(this.lstFacturas_SelectedIndexChanged);
             // 
             // btnAlta
             // 
-            this.btnAlta.Location = new System.Drawing.Point(972, 124);
+            this.btnAlta.Location = new System.Drawing.Point(73, 496);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(129, 59);
             this.btnAlta.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             // btnBaja
             // 
-            this.btnBaja.Location = new System.Drawing.Point(972, 202);
+            this.btnBaja.Location = new System.Drawing.Point(283, 496);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(129, 59);
             this.btnBaja.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(972, 497);
+            this.btnSalir.Location = new System.Drawing.Point(1222, 496);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(129, 53);
             this.btnSalir.TabIndex = 3;
@@ -78,7 +78,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1170, 600);
+            this.ClientSize = new System.Drawing.Size(1400, 600);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnAlta);
