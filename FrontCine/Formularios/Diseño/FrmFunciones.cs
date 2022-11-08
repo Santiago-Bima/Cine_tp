@@ -245,7 +245,11 @@ namespace FrontCine.Formularios.Diseño
                  "saliendo...",
                  MessageBoxButtons.YesNo,
                  MessageBoxIcon.Question,
-                 MessageBoxDefaultButton.Button2) == DialogResult.Yes) Close();
+                 MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                instancia = null;
+                Close();
+            }
         }
 
         private void lstFunciones_SelectedIndexChanged(object sender, EventArgs e)

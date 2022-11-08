@@ -138,7 +138,11 @@ namespace FrontCine.Formularios.Diseño
                  "saliendo...",
                  MessageBoxButtons.YesNo,
                  MessageBoxIcon.Question,
-                 MessageBoxDefaultButton.Button2) == DialogResult.Yes) Close();
+                 MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                instancia = null;
+                Close();
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
