@@ -55,13 +55,14 @@ namespace LibreriaApi.Data
                 oFuncion.IdSala = Convert.ToInt32(dr[5]);
                 oFuncion.IdFormato = Convert.ToInt32(dr[7]);
                 oFuncion.Precio = Convert.ToDouble(dr[10]);
+                oFuncion.Titulo = dr[4].ToString();
 
                 lst.Add(oFuncion);
             }
 
             return lst;
         }
-        public int EjecutarSQL(string strSql, List<Parametro> values)
+        public int EjecutarSQL(string strSql, List<Parametro> values, Funcion funcion)
         {
             int afectadas = 0;
             SqlTransaction t = null;
@@ -83,6 +84,16 @@ namespace LibreriaApi.Data
                         cmd.Parameters.AddWithValue(param.Clave, param.Valor);
                     }
                 }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@fecha", funcion.Fecha);
+                    cmd.Parameters.AddWithValue("@precio", funcion.Precio);
+                    cmd.Parameters.AddWithValue("@id_pelicula", funcion.IdPelicula);
+                    cmd.Parameters.AddWithValue("@id_sala", funcion.IdSala);
+                    cmd.Parameters.AddWithValue("@id_formato", funcion.IdFormato);
+                    cmd.Parameters.AddWithValue("@hora", funcion.Horario);
+                }
+
                 afectadas = cmd.ExecuteNonQuery();
                 t.Commit();
             }

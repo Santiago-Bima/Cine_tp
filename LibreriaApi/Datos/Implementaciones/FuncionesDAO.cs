@@ -16,9 +16,9 @@ namespace LibreriaApi.Data.Implementaciones
             return HelperFuncionesDAO.ObtenerInstancia().ConsultarDB(sp, values);
         }
 
-        public int EjecutarSQL(string sp, List<Parametro> lParametros)
+        public int EjecutarSQL(string sp, List<Parametro> lParametros, Funcion funcion)
         {
-            return HelperFuncionesDAO.ObtenerInstancia().EjecutarSQL(sp, lParametros);
+            return HelperFuncionesDAO.ObtenerInstancia().EjecutarSQL(sp, lParametros, funcion);
         }
 
         public List<Funcion> ObtenerFunciones()

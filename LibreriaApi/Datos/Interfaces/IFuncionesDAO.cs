@@ -11,7 +11,7 @@ namespace LibreriaApi.Data.Interfaces
     public interface IFuncionesDAO
     {
         DataTable ConsultarDB(string sp, List<Parametro> values);
-        int EjecutarSQL(string sp, List<Parametro> lParametros);
+        int EjecutarSQL(string sp, List<Parametro> lParametros, Funcion funcion);
         List<Funcion> ObtenerFunciones();
     }
 }

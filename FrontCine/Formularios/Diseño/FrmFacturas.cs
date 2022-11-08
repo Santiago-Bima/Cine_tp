@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrontCine.Http;
 using LibreriaApi.Data;
 using LibreriaApi.Data.Implementaciones;
 using LibreriaApi.Data.Interfaces;
 using LibreriaApi.Dominio;
+using Newtonsoft.Json;
 
 namespace FrontCine.Formularios.Diseño
 {
@@ -18,6 +20,7 @@ namespace FrontCine.Formularios.Diseño
     {
         private Factura oFactura;
         private ITicketsDAO oDao;
+        List<Funcion> lst;
         private static FrmFacturas instancia;
 
         public static FrmFacturas ObtenerInstancia()
@@ -80,12 +83,14 @@ namespace FrontCine.Formularios.Diseño
             cbo.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void CargarFunciones()
+        private async void CargarFunciones()
         {
-            DataTable tabla = oDao.ConsultarDB("consultar_funciones", null);
-            cboFunciones.DataSource = tabla;
-            cboFunciones.ValueMember = "idFuncion";
-            cboFunciones.DisplayMember = "titulo";
+            string url = "http://localhost:5115/funciones";
+            var result = await ClientSingleton.GetInstance().GetAsync(url);
+            lst = JsonConvert.DeserializeObject<List<Funcion>>(result);
+            cboFunciones.DataSource = lst;
+            cboFunciones.ValueMember = "IdFuncion";
+            cboFunciones.DisplayMember = "Titulo";
             cboFunciones.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -94,11 +99,11 @@ namespace FrontCine.Formularios.Diseño
             if (cboFunciones.SelectedValue is not DataRowView)
             {
                 List<Parametro> lParametros = new List<Parametro>();
-                lParametros.Add(new Parametro("@id_funcion", Convert.ToInt32(cboFunciones.SelectedValue)));
+                lParametros.Add(new Parametro("@id_funcion", lst[cboFunciones.SelectedIndex].IdFuncion));
                 DataTable tabla = oDao.ConsultarDB("consultar_funcion", lParametros);
 
 
-
+                
                 foreach (DataRow row in tabla.Rows)
                 {
                     cboFormato.DataSource = tabla;

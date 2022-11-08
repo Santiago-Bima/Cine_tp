@@ -1,7 +1,9 @@
-﻿using LibreriaApi.Data;
+﻿using FrontCine.Http;
+using LibreriaApi.Data;
 using LibreriaApi.Data.Implementaciones;
 using LibreriaApi.Data.Interfaces;
 using LibreriaApi.Dominio;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -144,7 +146,7 @@ namespace FrontCine.Formularios.Diseño
             Limpiar();
         }
 
-        private void btnEnviar_Click(object sender, EventArgs e)
+        private async void btnEnviar_Click(object sender, EventArgs e)
         {
             if (txtPrecio.Text == string.Empty)
             {
@@ -177,38 +179,44 @@ namespace FrontCine.Formularios.Diseño
                 return;
             }
 
+
             oFuncion.Fecha = dtpFechaHora.Value.ToString();
             oFuncion.Horario = cboHorario.Text;
             oFuncion.IdPelicula = cboPelicula.SelectedIndex + 1;
-            oFuncion.IdSala = cboSala.SelectedIndex +1;
+            oFuncion.IdSala = cboSala.SelectedIndex + 1;
             oFuncion.IdFormato = cboFormato.SelectedIndex + 1;
+            oFuncion.Precio = Convert.ToDouble(txtPrecio.Text);
+
 
             List<Parametro> lParametros = new List<Parametro>();
             lParametros.Add(new Parametro("@fecha", oFuncion.Fecha));
-            lParametros.Add(new Parametro("@precio", Convert.ToDouble(txtPrecio.Text))); 
+            lParametros.Add(new Parametro("@precio", oFuncion.Precio));
             lParametros.Add(new Parametro("@id_pelicula", oFuncion.IdPelicula));
             lParametros.Add(new Parametro("@id_sala", oFuncion.IdSala));
             lParametros.Add(new Parametro("@id_formato", oFuncion.IdFormato));
             lParametros.Add(new Parametro("@hora", oFuncion.Horario));
+
             if (cboPelicula.Enabled)
             {
-                if (oDao.EjecutarSQL("Insertar_Funciones", lParametros) > 0)
+                var result = await PostearFuncion(oFuncion);
+                string final = result.ToString();
+
+                if (final != null)
                 {
-                    MessageBox.Show("se ha podido ingresar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Función registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Habilitar(false);
                     Limpiar();
                     CargarLista();
                 }
                 else
                 {
-                    MessageBox.Show("No se ha podido ingresar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
+                    MessageBox.Show("ERROR. No se pudo registrar la Función", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
                 lParametros.Add(new Parametro("@id_funcion", lFunciones[lstFunciones.SelectedIndex].IdFuncion));
-                if (oDao.EjecutarSQL("actualizar_Funciones", lParametros) > 0)
+                if (oDao.EjecutarSQL("actualizar_Funciones", lParametros, null) > 0)
                 {
                     MessageBox.Show("se ha podido actualizar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Habilitar(false);
@@ -222,13 +230,23 @@ namespace FrontCine.Formularios.Diseño
                 }
             }
         }
+
+        private async Task<bool> PostearFuncion(Funcion oFuncion)
+        {
+            string bodyContent = JsonConvert.SerializeObject(oFuncion);
+
+            string url = "http://localhost:5115/savefuncion";
+            var result = await ClientSingleton.GetInstance().PostAsync(url, bodyContent);
+
+            return result.Equals("OK");
+        }
             
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             List<Parametro> lParametros = new List<Parametro>();
             lParametros.Add(new Parametro("@id", lFunciones[lstFunciones.SelectedIndex].IdFuncion));
-            if(oDao.EjecutarSQL("Eliminar_Funciones", lParametros) > 0)
+            if(oDao.EjecutarSQL("Eliminar_Funciones", lParametros, null) > 0)
             {
                 MessageBox.Show("Se ha podido eliminar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 lstFunciones.Items.RemoveAt(lstFunciones.SelectedIndex);

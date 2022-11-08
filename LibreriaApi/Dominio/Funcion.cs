@@ -15,6 +15,7 @@ namespace LibreriaApi.Dominio
         public int IdPelicula { get; set; }
         public int IdSala { get; set; }
         public int IdFormato { get; set; }
+        public string Titulo { get; set; }
 
         public Funcion()
         {
@@ -25,6 +26,7 @@ namespace LibreriaApi.Dominio
             IdPelicula = 0;
             IdSala = 0;
             IdFormato = 0;
+            Titulo = string.Empty;
         }
     }
 }

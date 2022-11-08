@@ -23,10 +23,10 @@ namespace LibreriaApi.Fachada
         {
             return dao.ObtenerFunciones();
         }
-        public int SaveFuncion(List<Parametro> lParametros)
+        public bool SaveFuncion(Funcion funcion)
         {
-
-            return dao.EjecutarSQL("insertar_funciones", lParametros);
+            if (dao.EjecutarSQL("insertar_funciones", null, funcion) > 0) return true;
+            else return false;
         }
     }
 }

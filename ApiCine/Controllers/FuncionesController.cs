@@ -20,7 +20,7 @@ namespace ApiCine.Controllers
         [HttpGet("/funciones")]
         public IActionResult GetFunciones()
         {
-            List<Funcion> lst = null;
+            List<Funcion> lst;
             try
             {
                 lst = dataApi.GetFunciones();
@@ -34,16 +34,16 @@ namespace ApiCine.Controllers
         }
 
         [HttpPost("/saveFuncion")]
-        public IActionResult PostFuncion(List<Parametro> lParametros)
+        public IActionResult PostFuncion(Funcion funcion)
         {
             try
             {
-                if (lParametros == null)
+                if (funcion == null)
                 {
                     return BadRequest("Datos de funcion incorrectos!");
                 }
 
-                return Ok(dataApi.SaveFuncion(lParametros));
+                return Ok(dataApi.SaveFuncion(funcion));
             }
             catch (Exception ex)
             {

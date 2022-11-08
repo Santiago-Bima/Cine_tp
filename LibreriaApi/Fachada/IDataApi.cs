@@ -11,6 +11,6 @@ namespace LibreriaApi.Fachada
     public interface IDataApi
     {
         public List<Funcion> GetFunciones();
-        public int SaveFuncion(List<Parametro> lParametros);
+        public bool SaveFuncion(Funcion funcion);
     }
 }
