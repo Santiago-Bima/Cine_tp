@@ -171,14 +171,19 @@ as
     from facturas f join clientes c on c.id_cliente = f.id_cliente
 	join formas_pago fp on fp.id_forma_pago = f.id_forma_pago
 
+
 create proc Insertar_Factura
 	@id_cliente int,
 	@id_forma_pago int,
 	@fecha datetime,
 	@descuento decimal(10,2),
-	@total money
-	as
+	@total money,
+	@nro_factura int OUTPUT
+as
+begin
 	insert into facturas(id_cliente,id_forma_pago,fecha,descuento,total, bajas) values(@id_cliente, @id_forma_pago,@fecha,@descuento,@total, 0x00)
+	SET @nro_factura = SCOPE_IDENTITY();
+end
 
 create proc [dbo].baja_factura
 	@nro_factura int

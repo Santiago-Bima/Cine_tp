@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HiHz+x7hgF7EYEF0vjk2ewIflcAsgQj75cjs9sEdGNnz51dYPIesR5ihrNsvDJg5iE/RclsvSL9QXK1vfMarpg==",
+  "dgSpecHash": "MlSUObHTRWnDNOUfJnOMhnLvLiSGaV4SxgPkid/mxOhYUZtGYs/nbjARWn6ZVF+IMW3q/HMILF+BSSTZtnIUkA==",
   "success": true,
   "projectFilePath": "Z:\\TUP\\C2\\Prog\\Cine_tp\\LibreriaApi\\LibreriaCine.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,7 @@
     "C:\\Users\\Santi\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Santi\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Santi\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "C:\\Users\\Santi\\.nuget\\packages\\system.data.sqlclient\\4.8.4\\system.data.sqlclient.4.8.4.nupkg.sha512",
+    "C:\\Users\\Santi\\.nuget\\packages\\system.data.sqlclient\\4.8.5\\system.data.sqlclient.4.8.5.nupkg.sha512",
     "C:\\Users\\Santi\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\Santi\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
   ],
