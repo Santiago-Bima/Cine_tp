@@ -1,0 +1,12 @@
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\bin\Debug\net6.0\LibreriaApi.deps.json
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\bin\Debug\net6.0\LibreriaApi.dll
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\bin\Debug\net6.0\LibreriaApi.pdb
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\LibreriaApi.csproj.AssemblyReference.cache
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\LibreriaApi.GeneratedMSBuildEditorConfig.editorconfig
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\LibreriaApi.AssemblyInfoInputs.cache
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\LibreriaApi.AssemblyInfo.cs
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\LibreriaApi.csproj.CoreCompileInputs.cache
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\LibreriaApi.dll
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\refint\LibreriaApi.dll
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\LibreriaApi.pdb
+Z:\TUP\C2\Prog\Cine_tp\LibreriaApi\obj\Debug\net6.0\ref\LibreriaApi.dll
