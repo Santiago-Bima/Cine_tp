@@ -67,8 +67,8 @@ namespace FrontCine.Formularios.Diseño
 
             lblCantTickets.Text = "Cantidad de Tickets: ";
             lblNroFactura.Text = "Número de Factura: N°";
-            lblTotal.Text = "Total: ";
-            lblSubTotal.Text = "SubTotal: ";
+            lblTotal.Text = "Total: $";
+            lblSubTotal.Text = "SubTotal: $";
         }
 
         private void CargarCombos(ComboBox cbo, string sp)
@@ -91,13 +91,13 @@ namespace FrontCine.Formularios.Diseño
 
         private void cboFunciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cboFunciones.SelectedValue is not DataRowView)
+            if (cboFunciones.SelectedValue is not DataRowView)
             {
                 List<Parametro> lParametros = new List<Parametro>();
                 lParametros.Add(new Parametro("@id_funcion", Convert.ToInt32(cboFunciones.SelectedValue)));
                 DataTable tabla = oDao.ConsultarDB("consultar_funcion", lParametros);
 
-                
+
 
                 foreach (DataRow row in tabla.Rows)
                 {
@@ -117,16 +117,16 @@ namespace FrontCine.Formularios.Diseño
 
                     cboFormato.ValueMember = "idformato";
                     cboFormato.DisplayMember = "formato";
-                }
 
-                if (cboFunciones.SelectedIndex > 0)
-                {
+
                     cboButacas.Enabled = true;
                     DataTable tablaButacas = oDao.ConsultarDB("combo_butacas", lParametros);
                     cboButacas.DataSource = tablaButacas;
                     cboButacas.ValueMember = "butaca";
                     cboButacas.DisplayMember = "butaca";
                     cboButacas.DropDownStyle = ComboBoxStyle.DropDownList;
+
+                    cboButacas.SelectedIndex = -1;
                 }
             }
             
@@ -165,8 +165,8 @@ namespace FrontCine.Formularios.Diseño
 
             foreach (DataGridViewRow row in dgvTickets.Rows)
             {
-                if (row.Cells["colButaca"].Value.ToString().Equals(cboButacas.SelectedIndex.ToString()) &&
-                    row.Cells["idFuncion"].Value.ToString().Equals(cboFunciones.SelectedIndex.ToString())){
+                if (row.Cells["colButaca"].Value.ToString().Equals(cboButacas.SelectedValue.ToString()) &&
+                    row.Cells["idFuncion"].Value.ToString().Equals(cboFunciones.SelectedValue.ToString())){
                     MessageBox.Show("Ya se esta utilizando esa Butaca", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
@@ -188,10 +188,10 @@ namespace FrontCine.Formularios.Diseño
 
             oFactura.AgregarTicket(ticket);
 
-            dgvTickets.Rows.Add(cboFunciones.SelectedIndex,cboFunciones.Text, cboSala.Text, cboButacas.Text, txtFecha.Text, txtHora.Text, cboIdioma.Text, cboFormato.Text, txtPrecio.Text);
+            dgvTickets.Rows.Add(cboFunciones.SelectedValue, cboFunciones.Text, cboSala.Text, cboButacas.Text, txtFecha.Text, txtHora.Text, cboIdioma.Text, cboFormato.Text, txtPrecio.Text);
 
             CalcularSubTotal();
-            lblTotal.Text = "Total: " + CalcularTotal().ToString();
+            lblTotal.Text = "Total: $" + CalcularTotal().ToString();
             CalcularCantTickets();
             cboFunciones.SelectedIndex = -1;
             cboButacas.SelectedIndex = -1;
@@ -207,7 +207,7 @@ namespace FrontCine.Formularios.Diseño
         private void CalcularSubTotal()
         {
             double subTotal = oFactura.CalcularSubTotal();
-            lblSubTotal.Text = "SubTotal: " + subTotal.ToString();
+            lblSubTotal.Text = "SubTotal: $" + subTotal.ToString();
         }
         private double CalcularTotal()
         {
@@ -235,7 +235,7 @@ namespace FrontCine.Formularios.Diseño
         private void GuardarTransaccion()
         {
 
-            oFactura.IdCliente = cboClientes.SelectedIndex;
+            oFactura.IdCliente = Convert.ToInt32(cboClientes.SelectedValue);
             oFactura.Fecha = txtFecha.Text;
             if (txtDescuento.Text.Equals(string.Empty)) oFactura.Descuento = 0;
             else oFactura.Descuento = Convert.ToDouble(txtDescuento.Text);

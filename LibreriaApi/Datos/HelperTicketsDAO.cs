@@ -81,9 +81,8 @@ namespace LibreriaApi.Data
                 cnn.Open();
                 t = cnn.BeginTransaction();
                 cmd.Connection = cnn;
+                cmd = new SqlCommand("insertar_factura", cnn, t);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "insertar_factura";
-                cmd.Transaction = t;
 
                 if (values != null)
                 {
@@ -93,7 +92,6 @@ namespace LibreriaApi.Data
                     }
                 }
                 afectadas = cmd.ExecuteNonQuery();
-                int ticketNro = 1;
 
                 foreach (Ticket ticket in oFactura.lTicket)
                 {
@@ -104,16 +102,13 @@ namespace LibreriaApi.Data
                     cmdTicket.Parameters.AddWithValue("@id_funcion", ticket.Funcion.IdFuncion);
                     cmdTicket.Parameters.AddWithValue("@id_butaca", ticket.Butaca);
                     cmdTicket.ExecuteNonQuery();
-
-
-                    ticketNro++;
                 }
 
                 t.Commit();
             }
             catch (SqlException)
             {
-                if (t != null) { t.Rollback(); }
+                if (t != null) t.Rollback();
             }
             finally
             {
