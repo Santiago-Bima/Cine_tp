@@ -256,7 +256,7 @@ namespace FrontCine.Formularios.Diseño
         {
             oFactura.IdFactura = oDao.ConsultaEscalarSQL("consultar_proxFactura", "@id");
             oFactura.IdCliente = Convert.ToInt32(cboClientes.SelectedValue);
-            oFactura.Fecha = txtFecha.Text;
+            oFactura.Fecha = Convert.ToString(DateTime.Today);
             if (txtDescuento.Text.Equals(string.Empty)) oFactura.Descuento = 0;
             else oFactura.Descuento = Convert.ToDouble(txtDescuento.Text);
             oFactura.IdFormaPago = Convert.ToInt32(cboFormasPago.SelectedValue);
@@ -264,9 +264,10 @@ namespace FrontCine.Formularios.Diseño
             List<Parametro> lParametros = new List<Parametro>();
             lParametros.Add(new Parametro("@id_cliente", oFactura.IdCliente));
             lParametros.Add(new Parametro("@id_forma_pago", oFactura.IdFormaPago));
-            lParametros.Add(new Parametro("@fecha", oFactura.Fecha));
+            lParametros.Add(new Parametro("@fecha", DateTime.Today));
             lParametros.Add(new Parametro("@descuento", oFactura.Descuento));
             lParametros.Add(new Parametro("@total", CalcularTotal()));
+
 
             if (oDao.EjecutarTransaccion(oFactura, lParametros))
             {

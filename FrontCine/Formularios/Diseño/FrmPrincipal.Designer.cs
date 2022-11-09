@@ -38,8 +38,9 @@
             this.nuevaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darDeAltaBajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.funcionesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.conCriterioDeAgrupamientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simplesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quienesSomosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -124,25 +125,34 @@
             // reportesToolStripMenuItem
             // 
             this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.facturasToolStripMenuItem,
             this.funcionesToolStripMenuItem1});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(98, 29);
             this.reportesToolStripMenuItem.Text = "Reportes";
             // 
-            // facturasToolStripMenuItem
-            // 
-            this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
-            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.facturasToolStripMenuItem.Text = "Facturas";
-            this.facturasToolStripMenuItem.Click += new System.EventHandler(this.facturasToolStripMenuItem_Click);
-            // 
             // funcionesToolStripMenuItem1
             // 
+            this.funcionesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.conCriterioDeAgrupamientoToolStripMenuItem,
+            this.simplesToolStripMenuItem});
             this.funcionesToolStripMenuItem1.Name = "funcionesToolStripMenuItem1";
             this.funcionesToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.funcionesToolStripMenuItem1.Text = "Funciones";
             this.funcionesToolStripMenuItem1.Click += new System.EventHandler(this.funcionesToolStripMenuItem1_Click);
+            // 
+            // conCriterioDeAgrupamientoToolStripMenuItem
+            // 
+            this.conCriterioDeAgrupamientoToolStripMenuItem.Name = "conCriterioDeAgrupamientoToolStripMenuItem";
+            this.conCriterioDeAgrupamientoToolStripMenuItem.Size = new System.Drawing.Size(353, 34);
+            this.conCriterioDeAgrupamientoToolStripMenuItem.Text = "Con Criterio de Agrupamiento";
+            this.conCriterioDeAgrupamientoToolStripMenuItem.Click += new System.EventHandler(this.conCriterioDeAgrupamientoToolStripMenuItem_Click);
+            // 
+            // simplesToolStripMenuItem
+            // 
+            this.simplesToolStripMenuItem.Name = "simplesToolStripMenuItem";
+            this.simplesToolStripMenuItem.Size = new System.Drawing.Size(353, 34);
+            this.simplesToolStripMenuItem.Text = "Simples";
+            this.simplesToolStripMenuItem.Click += new System.EventHandler(this.simplesToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
@@ -190,9 +200,10 @@
         private ToolStripMenuItem nuevaToolStripMenuItem;
         private ToolStripMenuItem darDeAltaBajaToolStripMenuItem;
         private ToolStripMenuItem reportesToolStripMenuItem;
-        private ToolStripMenuItem facturasToolStripMenuItem;
         private ToolStripMenuItem funcionesToolStripMenuItem1;
         private ToolStripMenuItem acercaDeToolStripMenuItem;
         private ToolStripMenuItem quienesSomosToolStripMenuItem;
+        private ToolStripMenuItem conCriterioDeAgrupamientoToolStripMenuItem;
+        private ToolStripMenuItem simplesToolStripMenuItem;
     }
 }

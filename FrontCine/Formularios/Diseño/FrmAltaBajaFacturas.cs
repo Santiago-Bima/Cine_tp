@@ -66,6 +66,7 @@ namespace FrontCine.Formularios.Diseño
 
                 lstFacturas.Items.Add("Factura: " + Convert.ToString(fila["nro_factura"]) + " - "
                                         + "Cliente: " + fila["cliente"] + " - "
+                                        + "Feche: " + fila["DD/MM/YY"] + " - "
                                         + "Froma de Pago: " + fila["forma_pago"] + " - "
                                         + "Descuento: $" + fila["descuento"] + " - "
                                         + "Total: $" + fila["total"] + " - "

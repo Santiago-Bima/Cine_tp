@@ -1,6 +1,6 @@
 ﻿namespace FrontCine.Formularios.Reportes
 {
-    partial class FrmRepFacturas
+    partial class FrmRepAgrupadoFunciones
     {
         /// <summary>
         /// Required designer variable.

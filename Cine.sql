@@ -170,7 +170,6 @@ as
 	join formas_pago fp on fp.id_forma_pago = f.id_forma_pago
 	order by bajas
 
-
 create proc Insertar_Factura
 	@id_cliente int,
 	@id_forma_pago int,
@@ -294,7 +293,6 @@ join formatos fr on fr.id_formato = fu.id_formato
 where year(fa.fecha) between @año1 and @año2
 group by  fu.id_funcion ,titulo,idioma,genero,formato,year(fa.fecha)
 
-select * from facturas
 
 create proc Consultar_Lista_Funciones
 as
