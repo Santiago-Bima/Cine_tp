@@ -169,7 +169,7 @@ as
     from facturas f join clientes c on c.id_cliente = f.id_cliente
 	join formas_pago fp on fp.id_forma_pago = f.id_forma_pago
 	order by bajas
-
+select * from peliculas
 create proc Insertar_Factura
 	@id_cliente int,
 	@id_forma_pago int,
