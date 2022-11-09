@@ -76,7 +76,7 @@ namespace ApiCine.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return StatusCode(500, "Error interno! Intente luego");
             }
         }
     }

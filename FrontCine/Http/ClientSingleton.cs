@@ -39,7 +39,7 @@ namespace FrontCine.Http
                 response = await result.Content.ReadAsStringAsync();
             return response;
         }
-        public async Task<string> PutAsync(string url, string data)
+        public async Task<string> UpdateAsync(string url, string data)
         {
             StringContent content = new StringContent(data, Encoding.UTF8,
             "application/json");

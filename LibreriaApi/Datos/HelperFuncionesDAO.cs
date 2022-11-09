@@ -91,7 +91,7 @@ namespace LibreriaApi.Data
                     cmd.Parameters.AddWithValue("@id_sala", funcion.IdSala);
                     cmd.Parameters.AddWithValue("@id_formato", funcion.IdFormato);
                     cmd.Parameters.AddWithValue("@hora", funcion.Horario);
-                    cmd.Parameters.AddWithValue("@id_funcion", funcion.IdFuncion);
+                    if(funcion.IdFuncion > 0) cmd.Parameters.AddWithValue("@id_funcion", funcion.IdFuncion);
                 }
 
                 afectadas = cmd.ExecuteNonQuery();

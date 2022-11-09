@@ -45,7 +45,6 @@ namespace FrontCine.Formularios.Diseño
             CargarCombo(cboFormato, "Combo_formatos");
             CargarLista();
             Limpiar();
-            dtpFechaHora.Format = DateTimePickerFormat.Custom;
         }
 
         private void Habilitar(bool x)
@@ -190,46 +189,64 @@ namespace FrontCine.Formularios.Diseño
             oFuncion.Titulo = cboPelicula.Text;
 
 
-            List<Parametro> lParametros = new List<Parametro>();
-            lParametros.Add(new Parametro("@fecha", oFuncion.Fecha));
-            lParametros.Add(new Parametro("@precio", oFuncion.Precio));
-            lParametros.Add(new Parametro("@id_pelicula", oFuncion.IdPelicula));
-            lParametros.Add(new Parametro("@id_sala", oFuncion.IdSala));
-            lParametros.Add(new Parametro("@id_formato", oFuncion.IdFormato));
-            lParametros.Add(new Parametro("@hora", oFuncion.Horario));
-
-            if (cboPelicula.Enabled)
+            if (!Existe(oFuncion))
             {
-                if (await PostearFuncion(oFuncion) == true)
+                List<Parametro> lParametros = new List<Parametro>();
+                lParametros.Add(new Parametro("@fecha", oFuncion.Fecha));
+                lParametros.Add(new Parametro("@precio", oFuncion.Precio));
+                lParametros.Add(new Parametro("@id_pelicula", oFuncion.IdPelicula));
+                lParametros.Add(new Parametro("@id_sala", oFuncion.IdSala));
+                lParametros.Add(new Parametro("@id_formato", oFuncion.IdFormato));
+                lParametros.Add(new Parametro("@hora", oFuncion.Horario));
+
+                if (cboPelicula.Enabled)
                 {
-                    MessageBox.Show("Función registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Habilitar(false);
-                    Limpiar();
-                    CargarLista();
+                    if (await PostearFuncion(oFuncion) == true)
+                    {
+                        MessageBox.Show("Función registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Habilitar(false);
+                        Limpiar();
+                        CargarLista();
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR. No se pudo registrar la Función", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("ERROR. No se pudo registrar la Función", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    oFuncion.IdFuncion = lFunciones[lstFunciones.SelectedIndex].IdFuncion;
+
+
+                    if (await EditarFuncion(oFuncion) == true)
+                    {
+                        MessageBox.Show("se ha podido actualizar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        Habilitar(false);
+                        Limpiar();
+                        CargarLista();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha podido actualizar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
                 }
             }
             else
             {
-                oFuncion.IdFuncion = lFunciones[lstFunciones.SelectedIndex].IdFuncion;
-
-
-                if (await EditarFuncion(oFuncion) == true)
-                {
-                    MessageBox.Show("se ha podido actualizar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Habilitar(false);
-                    Limpiar();
-                    CargarLista();
-                }
-                else
-                {
-                    MessageBox.Show("No se ha podido actualizar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
+                MessageBox.Show("Ya existe esta función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
+        }
+
+        private bool Existe(Funcion funcion)
+        {
+            for (int i = 0; i < lFunciones.Count; i++)
+            {
+                if (lFunciones[i].IdFormato == funcion.IdFormato && lFunciones[i].IdSala == funcion.IdSala && lFunciones[i].IdPelicula == funcion.IdPelicula) return true;
+            }
+
+            return false;
         }
 
         private async Task<bool> PostearFuncion(Funcion oFuncion)
@@ -239,7 +256,7 @@ namespace FrontCine.Formularios.Diseño
             string url = "http://localhost:5115/savefuncion";
             var result = await ClientSingleton.GetInstance().PostAsync(url, bodyContent);
 
-            return result.Equals("OK");
+            return result.Equals("true");
         }
 
         private async Task<bool> EditarFuncion(Funcion oFuncion)
@@ -247,9 +264,9 @@ namespace FrontCine.Formularios.Diseño
             string bodyContent = JsonConvert.SerializeObject(oFuncion);
 
             string url = "http://localhost:5115/editfuncion";
-            var result = await ClientSingleton.GetInstance().PostAsync(url, bodyContent);
+            var result = await ClientSingleton.GetInstance().UpdateAsync(url, bodyContent);
 
-            return result.Equals("OK");
+            return result.Equals("true");
         }
 
 
@@ -276,7 +293,7 @@ namespace FrontCine.Formularios.Diseño
             string url = $"http://localhost:5115/deletefuncion/{lFunciones[lstFunciones.SelectedIndex].IdFuncion}";
             var result = await ClientSingleton.GetInstance().DeleteAsync(url);
 
-            return result.Equals("OK");
+            return result.Equals("true");
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
