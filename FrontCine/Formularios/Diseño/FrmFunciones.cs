@@ -243,7 +243,11 @@ namespace FrontCine.Formularios.Diseño
         {
             for (int i = 0; i < lFunciones.Count; i++)
             {
-                if (lFunciones[i].IdFormato == funcion.IdFormato && lFunciones[i].IdSala == funcion.IdSala && lFunciones[i].IdPelicula == funcion.IdPelicula) return true;
+                if (lFunciones[i].IdFormato == funcion.IdFormato && 
+                    lFunciones[i].IdSala == funcion.IdSala && 
+                    lFunciones[i].IdPelicula == funcion.IdPelicula && 
+                    lFunciones[i].Fecha == funcion.Fecha && 
+                    lFunciones[i].Horario == funcion.Horario) return true;
             }
 
             return false;
