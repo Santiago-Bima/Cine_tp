@@ -169,7 +169,7 @@ as
     from facturas f join clientes c on c.id_cliente = f.id_cliente
 	join formas_pago fp on fp.id_forma_pago = f.id_forma_pago
 	order by bajas
-select * from peliculas
+
 create proc Insertar_Factura
 	@id_cliente int,
 	@id_forma_pago int,
@@ -281,8 +281,8 @@ where g.id_genero = @genero
 group by titulo, idioma, CONVERT(varchar,fu.fecha,3), hora, idioma, formato, genero
 
 create proc Reportes_Facturas
-@año1 int,
-@año2 int
+@aÃ±o1 int,
+@aÃ±o2 int
 as
 select distinct(fu.id_funcion) 'ID de funcion', titulo Pelicula,idioma Idioma, genero Genero, formato Formato, CONVERT(varchar,fa.fecha,3) as [DD/MM/YY],sum(total) 'Total vendido' from facturas fa join detalle_facturas d on d.nro_factura = fa.nro_factura
 join funciones fu on fu.id_funcion = d.id_funcion
@@ -290,7 +290,7 @@ join peliculas p on p.id_pelicula = fu.id_pelicula
 join idiomas i on i.id_idioma = p.id_idioma
 join generos g on g.id_genero = p.id_genero
 join formatos fr on fr.id_formato = fu.id_formato
-where year(fa.fecha) between @año1 and @año2
+where year(fa.fecha) between @aÃ±o1 and @aÃ±o2
 group by  fu.id_funcion ,titulo,idioma,genero,formato,CONVERT(varchar,fa.fecha,3)
 
 
@@ -328,7 +328,7 @@ create proc [dbo].[Insertar_Funciones]
 	@hora varchar(10)
 as
 	insert into funciones(fecha, precio, id_pelicula, id_sala, id_formato, hora) values(FORMAT(@fecha,'dd/MM/yy'), @precio,@id_pelicula,@id_sala,@id_formato, @hora)
-select * from funciones
+
 
 	
 
@@ -351,7 +351,7 @@ insert into ciudades values('Rio Tercero',1)
 --Insert Barrios de cordoba
 insert into barrios values('Alberdi',1)
 insert into barrios values('Nueva Cordoba',1)
-insert into barrios values('Güemes',1)
+insert into barrios values('GÃ¼emes',1)
 insert into barrios values('Centro',1)
 insert into barrios values('Alta Cordoba',1)
 insert into barrios values('Las Quintas',2)
@@ -410,7 +410,7 @@ insert into clientes values('Martina','Maldonado',44286495,351269853,'MartinaMal
 
 
 --Idiomas
-insert into idiomas values('Español')
+insert into idiomas values('EspaÃ±ol')
 insert into idiomas values('Ingles con sutitulos')
 
 --Generos
