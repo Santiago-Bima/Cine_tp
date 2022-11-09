@@ -84,6 +84,7 @@
             this.Controls.Add(this.btnAlta);
             this.Controls.Add(this.lstFacturas);
             this.Name = "FrmAltaBajaFacturas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta y Baja de Facturas";
             this.Load += new System.EventHandler(this.FrmAltaBajaFacturas_Load);
             this.ResumeLayout(false);

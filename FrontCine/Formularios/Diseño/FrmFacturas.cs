@@ -99,40 +99,46 @@ namespace FrontCine.Formularios.Diseño
         {
             if (cboFunciones.SelectedValue is not DataRowView)
             {
-                List<Parametro> lParametros = new List<Parametro>();
-                lParametros.Add(new Parametro("@id_funcion", lst[cboFunciones.SelectedIndex].IdFuncion));
-                DataTable tabla = oDao.ConsultarDB("consultar_funcion", lParametros);
-
-
-                
-                foreach (DataRow row in tabla.Rows)
+                try
                 {
-                    cboFormato.DataSource = tabla;
-                    cboIdioma.DataSource = tabla;
-                    cboSala.DataSource = tabla;
 
-                    txtPrecio.Text = row["Precio"].ToString();
-                    txtFecha.Text = row["Fecha"].ToString();
-                    txtHora.Text = row["Hora"].ToString();
+                    List<Parametro> lParametros = new List<Parametro>();
+                    lParametros.Add(new Parametro("@id_funcion", lst[cboFunciones.SelectedIndex].IdFuncion));
+                    DataTable tabla = oDao.ConsultarDB("consultar_funcion", lParametros);
 
-                    cboSala.ValueMember = "idSala";
-                    cboSala.DisplayMember = "sala";
+                    foreach (DataRow row in tabla.Rows)
+                    {
+                        cboFormato.DataSource = tabla;
+                        cboIdioma.DataSource = tabla;
+                        cboSala.DataSource = tabla;
 
-                    cboIdioma.ValueMember = "ididioma";
-                    cboIdioma.DisplayMember = "idioma";
+                        txtPrecio.Text = row["Precio"].ToString();
+                        txtFecha.Text = row["Fecha"].ToString();
+                        txtHora.Text = row["Hora"].ToString();
 
-                    cboFormato.ValueMember = "idformato";
-                    cboFormato.DisplayMember = "formato";
+                        cboSala.ValueMember = "idSala";
+                        cboSala.DisplayMember = "sala";
+
+                        cboIdioma.ValueMember = "ididioma";
+                        cboIdioma.DisplayMember = "idioma";
+
+                        cboFormato.ValueMember = "idformato";
+                        cboFormato.DisplayMember = "formato";
 
 
-                    cboButacas.Enabled = true;
-                    DataTable tablaButacas = oDao.ConsultarDB("combo_butacas", lParametros);
-                    cboButacas.DataSource = tablaButacas;
-                    cboButacas.ValueMember = "butaca";
-                    cboButacas.DisplayMember = "butaca";
-                    cboButacas.DropDownStyle = ComboBoxStyle.DropDownList;
+                        cboButacas.Enabled = true;
+                        DataTable tablaButacas = oDao.ConsultarDB("combo_butacas", lParametros);
+                        cboButacas.DataSource = tablaButacas;
+                        cboButacas.ValueMember = "butaca";
+                        cboButacas.DisplayMember = "butaca";
+                        cboButacas.DropDownStyle = ComboBoxStyle.DropDownList;
 
-                    cboButacas.SelectedIndex = -1;
+                        cboButacas.SelectedIndex = -1;
+                    }
+                }
+                catch (Exception)
+                {
+                    //
                 }
             }
             
@@ -169,14 +175,15 @@ namespace FrontCine.Formularios.Diseño
 
 
 
-            //foreach (DataGridViewRow row in dgvTickets.Rows)
-            //{
-            //    if (row.Cells["colButaca"].Value.ToString().Equals(cboButacas.SelectedValue.ToString()) &&
-            //        row.Cells["idFuncion"].Value.ToString().Equals(cboFunciones.SelectedValue.ToString())){
-            //        MessageBox.Show("Ya se esta utilizando esa Butaca", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //        return;
-            //    }
-            //}
+            foreach (DataGridViewRow row in dgvTickets.Rows)
+            {
+                if (row.Cells["colButaca"].Value.ToString().Equals(cboButacas.SelectedValue.ToString()) &&
+                    row.Cells["idFuncion"].Value.ToString().Equals(cboFunciones.SelectedValue.ToString()))
+                {
+                    MessageBox.Show("Ya se esta utilizando esa Butaca", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
 
             double precio = Convert.ToDouble(txtPrecio.Text);
             Funcion funcion = new Funcion();
@@ -189,7 +196,7 @@ namespace FrontCine.Formularios.Diseño
 
             Ticket ticket = new Ticket();
             ticket.Precio = precio;
-            ticket.Butaca = cboButacas.SelectedIndex;
+            ticket.Butaca = Convert.ToInt32(cboButacas.SelectedValue);
             ticket.Funcion = funcion;
 
             oFactura.AgregarTicket(ticket);
@@ -201,6 +208,12 @@ namespace FrontCine.Formularios.Diseño
             CalcularCantTickets();
             cboFunciones.SelectedIndex = -1;
             cboButacas.SelectedIndex = -1;
+            txtPrecio.Text = string.Empty;
+            txtHora.Text = string.Empty;
+            txtFecha.Text = string.Empty;
+            cboFormato.SelectedIndex = -1;
+            cboIdioma.SelectedIndex = -1;
+            cboSala.SelectedIndex = -1;
             cboButacas.Enabled = false;
         }
 
@@ -274,7 +287,7 @@ namespace FrontCine.Formularios.Diseño
                 oFactura.QuitaTicket(dgvTickets.CurrentRow.Index);
                 dgvTickets.Rows.Remove(dgvTickets.CurrentRow);
                 CalcularSubTotal();
-                lblTotal.Text = "Total: " + CalcularTotal().ToString();
+                lblTotal.Text = "Total: $" + CalcularTotal().ToString();
                 CalcularCantTickets();
 
             }
@@ -287,7 +300,12 @@ namespace FrontCine.Formularios.Diseño
 
         private void txtDescuento_TextChanged(object sender, EventArgs e)
         {
-            lblTotal.Text = "Total: " + CalcularTotal().ToString();
+            lblTotal.Text = "Total: $" + CalcularTotal().ToString();
+        }
+
+        private void cboButacas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.Logging;
+﻿using FrontCine.Formularios.Reportes;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -76,6 +77,20 @@ namespace FrontCine.Formularios.Diseño
         {
             string mensaje = "Proyecto de cine \n" + "Integrantes:  \n" + "112961 - Alfonso Juan Manuel \n" + "114219 - Barrera Mariano \n" + "114191 - Corvalán María Victoria \n" + "114007 - Bima Santiago \n" + "114039 - Pastor Jonás Alejandro";
             MessageBox.Show(mensaje, "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void facturasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRepAgrupadoFunciones frmRepFacturas = FrmRepAgrupadoFunciones.ObtenerInstancia();
+            frmRepFacturas.Show();
+            frmRepFacturas.Focus();
+        }
+
+        private void funcionesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmRepFunciones frmRepFunciones = FrmRepFunciones.ObtenerInstancia();
+            frmRepFunciones.Show();
+            frmRepFunciones.Focus();
         }
     }
 }

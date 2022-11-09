@@ -1,8 +1,6 @@
 create database cine_tp
 use cine_tp
 
-
-
 create table provincias(
 	id_provincia int identity(1,1) not null,
 	provincia varchar(100)
@@ -167,9 +165,10 @@ end
 
 create proc consultar_altafacturas
 as
-	Select nro_factura, apellido + ' ' + nombre Cliente , forma_pago, fecha, descuento, total, bajas
+	Select nro_factura, apellido + ' ' + nombre Cliente , forma_pago, CONVERT(varchar,fecha,3) as [DD/MM/YY], descuento, total, bajas
     from facturas f join clientes c on c.id_cliente = f.id_cliente
 	join formas_pago fp on fp.id_forma_pago = f.id_forma_pago
+	order by bajas
 
 
 create proc Insertar_Factura
@@ -181,15 +180,17 @@ create proc Insertar_Factura
 	@nro_factura int OUTPUT
 as
 begin
-	insert into facturas(id_cliente,id_forma_pago,fecha,descuento,total, bajas) values(@id_cliente, @id_forma_pago,@fecha,@descuento,@total, 0x00)
+	insert into facturas(id_cliente,id_forma_pago,fecha,descuento,total, bajas) values(@id_cliente, @id_forma_pago,FORMAT(@fecha,'dd/MM/yy'),@descuento,@total, 0x00)
 	SET @nro_factura = SCOPE_IDENTITY();
 end
 
 create proc [dbo].baja_factura
 	@nro_factura int
 as
+begin
 	update facturas set bajas = 0x01
 	where nro_factura = @nro_factura
+end
 
 create proc Alta_factura
 	@nro_factura int
@@ -231,11 +232,16 @@ create proc combo_formatos
 as
 select * from formatos
 
+create proc combo_generos
+as
+select * from generos
+
 create proc combo_butacas
 @id_funcion int
 as
 	select id_butaca butaca from butacas b
-	where id_butaca  not in (select r.id_butaca from reservadas r where r.id_funcion = @id_funcion )
+	where id_butaca  not in (select r.id_butaca from reservadas r where r.id_funcion = 50 )
+
 
 -- SP ABM Funciones 
 create proc Consultar_idioma
@@ -263,11 +269,36 @@ as
 	where f.id_funcion = @id_funcion
 
 
+create proc [dbo].[Reportes_funciones]
+@genero varchar(100)
+as
+select titulo Titulo, idioma Idioma, fu.fecha Fecha, hora Hora, idioma Idioma, formato Formato,genero Genero, count(distinct fa.nro_factura) 'Cantidad de entradas vendidas' from funciones fu join peliculas p on p.id_pelicula = fu.id_pelicula
+join idiomas i on i.id_idioma = p.id_idioma
+join formatos fr on fr.id_formato = fu.id_formato
+join detalle_facturas d on d.id_funcion = fu.id_funcion
+join facturas fa on fa.nro_factura = d.nro_factura
+join generos g on g.id_genero = p.id_genero
+where g.id_genero = @genero
+group by titulo, idioma, fu.fecha, hora, idioma, formato, genero
 
+create proc Reportes_Facturas
+@año1 int,
+@año2 int
+as
+select distinct(fu.id_funcion) 'ID de funcion', titulo Pelicula,idioma Idioma, genero Genero, formato Formato, year(fa.fecha) Fecha ,sum(total) 'Total vendido' from facturas fa join detalle_facturas d on d.nro_factura = fa.nro_factura
+join funciones fu on fu.id_funcion = d.id_funcion
+join peliculas p on p.id_pelicula = fu.id_pelicula
+join idiomas i on i.id_idioma = p.id_idioma
+join generos g on g.id_genero = p.id_genero
+join formatos fr on fr.id_formato = fu.id_formato
+where year(fa.fecha) between @año1 and @año2
+group by  fu.id_funcion ,titulo,idioma,genero,formato,year(fa.fecha)
+
+select * from facturas
 
 create proc Consultar_Lista_Funciones
 as
-select id_funcion, hora, fecha, p.id_pelicula, titulo,s.id_sala, sala, f.id_formato, formato, idioma, precio
+select id_funcion, hora, CONVERT(varchar,fecha,3) as [DD/MM/YY], p.id_pelicula, titulo,s.id_sala, sala, f.id_formato, formato, idioma, precio
 from funciones f join peliculas p on p.id_pelicula=f.id_pelicula
 join salas s on s.id_sala=f.id_sala
 join formatos fo on fo.id_formato=f.id_formato
@@ -282,7 +313,7 @@ create proc [dbo].[Actualizar_Funciones]
 	@id_formato int,
 	@hora varchar(10)
 as
-	update funciones set fecha = @fecha, precio = @precio, id_pelicula = @id_pelicula, id_sala = @id_sala, id_formato = @id_formato, hora = @hora
+	update funciones set fecha = FORMAT(@fecha,'dd/MM/yy'), precio = @precio, id_pelicula = @id_pelicula, id_sala = @id_sala, id_formato = @id_formato, hora = @hora
 	where id_funcion = @id_funcion
 
 create proc [dbo].[Eliminar_Funciones]
@@ -298,8 +329,8 @@ create proc [dbo].[Insertar_Funciones]
 	@id_formato int,
 	@hora varchar(10)
 as
-	insert into funciones(fecha, precio, id_pelicula, id_sala, id_formato, hora) values(@fecha, @precio,@id_pelicula,@id_sala,@id_formato, @hora)
-
+	insert into funciones(fecha, precio, id_pelicula, id_sala, id_formato, hora) values(FORMAT(@fecha,'dd/MM/yy'), @precio,@id_pelicula,@id_sala,@id_formato, @hora)
+select * from funciones
 
 	
 

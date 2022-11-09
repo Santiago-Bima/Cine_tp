@@ -133,14 +133,16 @@
             // facturasToolStripMenuItem
             // 
             this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
-            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(193, 34);
+            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.facturasToolStripMenuItem.Text = "Facturas";
+            this.facturasToolStripMenuItem.Click += new System.EventHandler(this.facturasToolStripMenuItem_Click);
             // 
             // funcionesToolStripMenuItem1
             // 
             this.funcionesToolStripMenuItem1.Name = "funcionesToolStripMenuItem1";
-            this.funcionesToolStripMenuItem1.Size = new System.Drawing.Size(193, 34);
+            this.funcionesToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.funcionesToolStripMenuItem1.Text = "Funciones";
+            this.funcionesToolStripMenuItem1.Click += new System.EventHandler(this.funcionesToolStripMenuItem1_Click);
             // 
             // acercaDeToolStripMenuItem
             // 

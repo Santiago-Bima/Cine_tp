@@ -77,3 +77,4 @@ Z:\TUP\C2\Prog\Cine_tp\FrontCine\bin\Debug\net6.0-windows\zh-CHT\Microsoft.Repor
 Z:\TUP\C2\Prog\Cine_tp\FrontCine\bin\Debug\net6.0-windows\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
 Z:\TUP\C2\Prog\Cine_tp\FrontCine\bin\Debug\net6.0-windows\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
 Z:\TUP\C2\Prog\Cine_tp\FrontCine\obj\Debug\net6.0-windows\FrontCine.Formularios.Reportes.FrmRepFunciones.resources
+Z:\TUP\C2\Prog\Cine_tp\FrontCine\obj\Debug\net6.0-windows\FrontCine.Formularios.Reportes.FrmRepFacturas.resources

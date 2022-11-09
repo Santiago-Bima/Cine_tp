@@ -46,7 +46,6 @@ namespace FrontCine.Formularios.Diseño
             CargarLista();
             Limpiar();
             dtpFechaHora.Format = DateTimePickerFormat.Custom;
-            dtpFechaHora.CustomFormat = "dd/MM/yyyy";
         }
 
         private void Habilitar(bool x)
@@ -182,13 +181,13 @@ namespace FrontCine.Formularios.Diseño
             }
 
 
-            oFuncion.Fecha = dtpFechaHora.Value.ToString("dd/MM/YYY");
+            oFuncion.Fecha = dtpFechaHora.Text;
             oFuncion.Horario = cboHorario.Text;
             oFuncion.IdPelicula = cboPelicula.SelectedIndex + 1;
             oFuncion.IdSala = cboSala.SelectedIndex + 1;
             oFuncion.IdFormato = cboFormato.SelectedIndex + 1;
             oFuncion.Precio = Convert.ToDouble(txtPrecio.Text);
-            oFuncion.IdFuncion = lFunciones[lstFunciones.SelectedIndex].IdFuncion;
+            oFuncion.Titulo = cboPelicula.Text;
 
 
             List<Parametro> lParametros = new List<Parametro>();
@@ -201,10 +200,7 @@ namespace FrontCine.Formularios.Diseño
 
             if (cboPelicula.Enabled)
             {
-                var result = await PostearFuncion(oFuncion);
-                string final = result.ToString();
-
-                if (final != null)
+                if (await PostearFuncion(oFuncion) == true)
                 {
                     MessageBox.Show("Función registrada", "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Habilitar(false);
@@ -218,10 +214,10 @@ namespace FrontCine.Formularios.Diseño
             }
             else
             {
-                var result = await EditarFuncion(oFuncion);
-                string final = result.ToString();
+                oFuncion.IdFuncion = lFunciones[lstFunciones.SelectedIndex].IdFuncion;
 
-                if (final != null)
+
+                if (await EditarFuncion(oFuncion) == true)
                 {
                     MessageBox.Show("se ha podido actualizar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Habilitar(false);
@@ -259,10 +255,7 @@ namespace FrontCine.Formularios.Diseño
 
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
-            var result = await EliminarFuncion(lFunciones);
-            string final = result.ToString();
-
-            if (final != null)
+            if (await EliminarFuncion(lFunciones) == true)
             {
                 MessageBox.Show("Se ha podido eliminar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 lstFunciones.Items.RemoveAt(lstFunciones.SelectedIndex);

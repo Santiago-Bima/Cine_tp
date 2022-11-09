@@ -1,4 +1,5 @@
 ﻿using FrontCine.Formularios.Diseño;
+using LibreriaApi.Data;
 using LibreriaApi.Data.Implementaciones;
 using LibreriaApi.Data.Interfaces;
 using LibreriaApi.Dominio;
@@ -17,7 +18,7 @@ namespace FrontCine.Formularios.Reportes
     public partial class FrmRepFunciones : Form
     {
         private Funcion oFuncion;
-        private ITicketsDAO oDao;
+        private IFuncionesDAO oDao;
         private List<Funcion> lFunciones;
         private static FrmRepFunciones instancia;
 
@@ -32,15 +33,16 @@ namespace FrontCine.Formularios.Reportes
         {
             InitializeComponent();
             oFuncion = new Funcion();
-            oDao = new TicketsDAO();
+            oDao = new FuncionesDAO();
             lFunciones = new List<Funcion>();
         }
 
-        private void FrmRepFunciones_Load(object sender, EventArgs e)
-        {
-            CargarCombos(cboGenero,"combo_generos");
-        }
 
+
+        private void FrmRepFunciones_Load_1(object sender, EventArgs e)
+        {
+            CargarCombos(cboGenero, "combo_generos");
+        }
         private void CargarCombos(ComboBox cbo, string sp)
         {
             DataTable tabla = oDao.ConsultarDB(sp, null);
@@ -53,8 +55,25 @@ namespace FrontCine.Formularios.Reportes
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            
             dgvFunciones.Rows.Clear();
-            DataTable tabla = oDao.
+            List<Parametro> lParametros = new List<Parametro>();
+            lParametros.Add(new Parametro("@genero", cboGenero.SelectedValue));
+
+            DataTable tabla = oDao.ConsultarDB("Reportes_funciones", lParametros);
+            foreach (DataRow fila in tabla.Rows)
+            {
+                dgvFunciones.Rows.Add(fila[0].ToString(),
+                                    fila[1].ToString(),
+                                    fila[2].ToString(),
+                                    fila[3].ToString(),
+                                    fila[4].ToString(),
+                                    fila[5].ToString(),
+                                    fila[6].ToString(),
+                                    fila[7].ToString()
+               );
+            }
+
 
         }
 
@@ -64,11 +83,6 @@ namespace FrontCine.Formularios.Reportes
         }
 
         private void cboGenero_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FrmRepFunciones_Load_1(object sender, EventArgs e)
         {
 
         }

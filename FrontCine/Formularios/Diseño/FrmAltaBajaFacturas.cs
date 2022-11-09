@@ -69,7 +69,6 @@ namespace FrontCine.Formularios.Diseño
                                         + "Froma de Pago: " + fila["forma_pago"] + " - "
                                         + "Descuento: $" + fila["descuento"] + " - "
                                         + "Total: $" + fila["total"] + " - "
-                                        + "Fecha: " + fila["fecha"] + " - "
                                         + "Estado: " + baja);
             }
         }

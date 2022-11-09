@@ -71,14 +71,8 @@ namespace ApiCine.Controllers
         {
             try
             {
-                if (oFuncion != null)
-                {
-                    return Ok(dataApi.EditFuncion(oFuncion));
-                }
-                else
-                {
-                    return BadRequest("Datos de funcion incorrectos!");
-                }
+                if (oFuncion == null) return BadRequest("Datos de funcion incorrectos!");
+                else return Ok(dataApi.EditFuncion(oFuncion));
             }
             catch (Exception ex)
             {

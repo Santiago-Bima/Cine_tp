@@ -43,6 +43,10 @@ namespace FrontCine.Formularios.Diseño
                     Hide();
                 }
             }
+            if(txtUsuario.Text != "Admin" || txtPassword.Text != "Pass")
+            {
+                MessageBox.Show("Usuario o Contraseña Incorrectos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void chkMostrar_CheckedChanged(object sender, EventArgs e)
