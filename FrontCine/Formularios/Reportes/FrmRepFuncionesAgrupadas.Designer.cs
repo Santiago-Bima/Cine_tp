@@ -41,6 +41,7 @@
             this.ColTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpFecha1 = new System.Windows.Forms.DateTimePicker();
             this.dtpFecha2 = new System.Windows.Forms.DateTimePicker();
+            this.btnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFacturas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,12 +164,25 @@
             this.dtpFecha2.TabIndex = 5;
             this.dtpFecha2.ValueChanged += new System.EventHandler(this.dtpFecha2_ValueChanged);
             // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSalir.Location = new System.Drawing.Point(857, 437);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(129, 53);
+            this.btnSalir.TabIndex = 6;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // FrmRepAgrupadoFunciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1022, 502);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.dtpFecha2);
             this.Controls.Add(this.dtpFecha1);
             this.Controls.Add(this.dgvFacturas);
@@ -200,5 +214,6 @@
         private DataGridViewTextBoxColumn ColFormato;
         private DataGridViewTextBoxColumn ColFecha;
         private DataGridViewTextBoxColumn ColTotal;
+        private Button btnSalir;
     }
 }

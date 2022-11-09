@@ -85,7 +85,7 @@
             // chkMostrar
             // 
             this.chkMostrar.AutoSize = true;
-            this.chkMostrar.Location = new System.Drawing.Point(422, 122);
+            this.chkMostrar.Location = new System.Drawing.Point(423, 122);
             this.chkMostrar.Name = "chkMostrar";
             this.chkMostrar.Size = new System.Drawing.Size(100, 29);
             this.chkMostrar.TabIndex = 2;
@@ -98,7 +98,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(541, 279);
+            this.ClientSize = new System.Drawing.Size(572, 297);
             this.Controls.Add(this.chkMostrar);
             this.Controls.Add(this.btnAcceder);
             this.Controls.Add(this.txtPassword);

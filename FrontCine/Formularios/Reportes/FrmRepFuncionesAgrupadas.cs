@@ -70,5 +70,18 @@ namespace FrontCine.Formularios.Reportes
         {
 
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Seguro que desea salir del formulario?",
+               "saliendo...",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Question,
+               MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                instancia = null;
+                Close();
+            }
+        }
     }
 }

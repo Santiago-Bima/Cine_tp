@@ -249,7 +249,7 @@
             // 
             this.cboIdiomas.Enabled = false;
             this.cboIdiomas.FormattingEnabled = true;
-            this.cboIdiomas.Location = new System.Drawing.Point(369, 116);
+            this.cboIdiomas.Location = new System.Drawing.Point(361, 116);
             this.cboIdiomas.Name = "cboIdiomas";
             this.cboIdiomas.Size = new System.Drawing.Size(258, 33);
             this.cboIdiomas.TabIndex = 6;
