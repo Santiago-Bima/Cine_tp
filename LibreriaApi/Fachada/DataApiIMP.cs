@@ -28,5 +28,19 @@ namespace LibreriaApi.Fachada
             if (dao.EjecutarSQL("insertar_funciones", null, funcion) > 0) return true;
             else return false;
         }
+
+        public bool DeleteFuncion(int id)
+        {
+            List<Parametro> lParametros = new List<Parametro>();
+            lParametros.Add(new Parametro("@id", id));
+            if (dao.EjecutarSQL("eliminar_funciones", lParametros, null) > 0) return true;
+            else return false;
+        }
+
+        public bool EditFuncion(Funcion funcion)
+        {
+            if (dao.EjecutarSQL("Actualizar_Funciones", null, funcion) > 0) return true;
+            else return false;
+        }
     }
 }

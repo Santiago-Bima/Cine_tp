@@ -45,6 +45,8 @@ namespace FrontCine.Formularios.Diseño
             CargarCombo(cboFormato, "Combo_formatos");
             CargarLista();
             Limpiar();
+            dtpFechaHora.Format = DateTimePickerFormat.Custom;
+            dtpFechaHora.CustomFormat = "dd/MM/yyyy";
         }
 
         private void Habilitar(bool x)
@@ -180,12 +182,13 @@ namespace FrontCine.Formularios.Diseño
             }
 
 
-            oFuncion.Fecha = dtpFechaHora.Value.ToString();
+            oFuncion.Fecha = dtpFechaHora.Value.ToString("dd/MM/YYY");
             oFuncion.Horario = cboHorario.Text;
             oFuncion.IdPelicula = cboPelicula.SelectedIndex + 1;
             oFuncion.IdSala = cboSala.SelectedIndex + 1;
             oFuncion.IdFormato = cboFormato.SelectedIndex + 1;
             oFuncion.Precio = Convert.ToDouble(txtPrecio.Text);
+            oFuncion.IdFuncion = lFunciones[lstFunciones.SelectedIndex].IdFuncion;
 
 
             List<Parametro> lParametros = new List<Parametro>();
@@ -215,8 +218,10 @@ namespace FrontCine.Formularios.Diseño
             }
             else
             {
-                lParametros.Add(new Parametro("@id_funcion", lFunciones[lstFunciones.SelectedIndex].IdFuncion));
-                if (oDao.EjecutarSQL("actualizar_Funciones", lParametros, null) > 0)
+                var result = await EditarFuncion(oFuncion);
+                string final = result.ToString();
+
+                if (final != null)
                 {
                     MessageBox.Show("se ha podido actualizar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Habilitar(false);
@@ -240,13 +245,24 @@ namespace FrontCine.Formularios.Diseño
 
             return result.Equals("OK");
         }
-            
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private async Task<bool> EditarFuncion(Funcion oFuncion)
         {
-            List<Parametro> lParametros = new List<Parametro>();
-            lParametros.Add(new Parametro("@id", lFunciones[lstFunciones.SelectedIndex].IdFuncion));
-            if(oDao.EjecutarSQL("Eliminar_Funciones", lParametros, null) > 0)
+            string bodyContent = JsonConvert.SerializeObject(oFuncion);
+
+            string url = "http://localhost:5115/editfuncion";
+            var result = await ClientSingleton.GetInstance().PostAsync(url, bodyContent);
+
+            return result.Equals("OK");
+        }
+
+
+        private async void btnEliminar_Click(object sender, EventArgs e)
+        {
+            var result = await EliminarFuncion(lFunciones);
+            string final = result.ToString();
+
+            if (final != null)
             {
                 MessageBox.Show("Se ha podido eliminar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 lstFunciones.Items.RemoveAt(lstFunciones.SelectedIndex);
@@ -260,6 +276,14 @@ namespace FrontCine.Formularios.Diseño
                 MessageBox.Show("No se ha podido eliminar la función", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+        }
+
+        private async Task<bool> EliminarFuncion(List<Funcion> lFunciones)
+        {
+            string url = $"http://localhost:5115/deletefuncion/{lFunciones[lstFunciones.SelectedIndex].IdFuncion}";
+            var result = await ClientSingleton.GetInstance().DeleteAsync(url);
+
+            return result.Equals("OK");
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -279,7 +303,6 @@ namespace FrontCine.Formularios.Diseño
         {
             try
             {
-
                 MostrarDatos(lstFunciones.SelectedIndex);
                 btnEditar.Enabled = true;
                 btnEliminar.Enabled = true;

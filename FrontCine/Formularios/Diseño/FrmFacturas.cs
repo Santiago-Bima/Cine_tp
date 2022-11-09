@@ -43,6 +43,7 @@ namespace FrontCine.Formularios.Diseño
             Limpiar();
             ProximaTransaccion();
         }
+
         private void ProximaTransaccion()
         {
             int next = oDao.ConsultaEscalarSQL("consultar_proxFactura", "@id");
@@ -54,7 +55,7 @@ namespace FrontCine.Formularios.Diseño
         private void Limpiar()
         {
             cboClientes.SelectedIndex = -1;
-            cboButacas.SelectedItem = -1;
+            cboButacas.SelectedIndex = -1;
             cboFormasPago.SelectedIndex = -1;
             cboFunciones.SelectedIndex = -1;
             cboFormato.SelectedIndex = -1;
@@ -168,17 +169,16 @@ namespace FrontCine.Formularios.Diseño
 
 
 
-            foreach (DataGridViewRow row in dgvTickets.Rows)
-            {
-                if (row.Cells["colButaca"].Value.ToString().Equals(cboButacas.SelectedValue.ToString()) &&
-                    row.Cells["idFuncion"].Value.ToString().Equals(cboFunciones.SelectedValue.ToString())){
-                    MessageBox.Show("Ya se esta utilizando esa Butaca", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-            }
+            //foreach (DataGridViewRow row in dgvTickets.Rows)
+            //{
+            //    if (row.Cells["colButaca"].Value.ToString().Equals(cboButacas.SelectedValue.ToString()) &&
+            //        row.Cells["idFuncion"].Value.ToString().Equals(cboFunciones.SelectedValue.ToString())){
+            //        MessageBox.Show("Ya se esta utilizando esa Butaca", "Control", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //        return;
+            //    }
+            //}
 
             double precio = Convert.ToDouble(txtPrecio.Text);
-
             Funcion funcion = new Funcion();
             funcion.IdFuncion = Convert.ToInt32(cboFunciones.SelectedValue);
             funcion.Fecha = txtFecha.Text;

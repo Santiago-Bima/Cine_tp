@@ -119,6 +119,7 @@
             // 
             // dtpFechaHora
             // 
+            this.dtpFechaHora.CustomFormat = "dd/MM/YYYY";
             this.dtpFechaHora.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaHora.Location = new System.Drawing.Point(97, 36);
             this.dtpFechaHora.Name = "dtpFechaHora";

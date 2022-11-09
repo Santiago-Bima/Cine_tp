@@ -50,5 +50,10 @@ namespace FrontCine.Formularios.Diseño
             if (chkMostrar.Checked) txtPassword.UseSystemPasswordChar = false;
             else txtPassword.UseSystemPasswordChar = true;
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

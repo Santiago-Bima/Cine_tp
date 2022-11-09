@@ -12,5 +12,7 @@ namespace LibreriaApi.Fachada
     {
         public List<Funcion> GetFunciones();
         public bool SaveFuncion(Funcion funcion);
+        public bool DeleteFuncion(int id);
+        public bool EditFuncion(Funcion funcion);
     }
 }

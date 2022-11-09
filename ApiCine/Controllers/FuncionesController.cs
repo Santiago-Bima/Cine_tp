@@ -50,5 +50,40 @@ namespace ApiCine.Controllers
                 return StatusCode(500, "Error interno! Intente luego");
             }
         }
+
+
+        [HttpDelete("/deleteFuncion/{id}")]
+        public IActionResult DeleteFunciones(int id)
+        {
+            try
+            {
+                return Ok(dataApi.DeleteFuncion(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error interno! Intente luego");
+
+            }
+        }
+
+        [HttpPut("/editFuncion")]
+        public IActionResult EditFuncion(Funcion oFuncion)
+        {
+            try
+            {
+                if (oFuncion != null)
+                {
+                    return Ok(dataApi.EditFuncion(oFuncion));
+                }
+                else
+                {
+                    return BadRequest("Datos de funcion incorrectos!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }
