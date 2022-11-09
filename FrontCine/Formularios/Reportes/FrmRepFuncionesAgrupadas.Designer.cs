@@ -32,8 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvFacturas = new System.Windows.Forms.DataGridView();
-            this.dtpFecha1 = new System.Windows.Forms.DateTimePicker();
-            this.dtpFecha2 = new System.Windows.Forms.DateTimePicker();
             this.IdFuncion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColPelicula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColIdioma = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,17 +39,21 @@
             this.ColFormato = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtpFecha1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFecha2 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFacturas)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFiltrar
             // 
+            this.btnFiltrar.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFiltrar.Location = new System.Drawing.Point(38, 442);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(172, 48);
             this.btnFiltrar.TabIndex = 0;
             this.btnFiltrar.Text = "Filtrar";
-            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.UseVisualStyleBackColor = false;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
             // label1
@@ -92,24 +94,6 @@
             this.dgvFacturas.Size = new System.Drawing.Size(965, 309);
             this.dgvFacturas.TabIndex = 3;
             this.dgvFacturas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFacturas_CellContentClick);
-            // 
-            // dtpFecha1
-            // 
-            this.dtpFecha1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha1.Location = new System.Drawing.Point(172, 34);
-            this.dtpFecha1.Name = "dtpFecha1";
-            this.dtpFecha1.Size = new System.Drawing.Size(155, 31);
-            this.dtpFecha1.TabIndex = 4;
-            this.dtpFecha1.ValueChanged += new System.EventHandler(this.dtpFecha1_ValueChanged);
-            // 
-            // dtpFecha2
-            // 
-            this.dtpFecha2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha2.Location = new System.Drawing.Point(508, 35);
-            this.dtpFecha2.Name = "dtpFecha2";
-            this.dtpFecha2.Size = new System.Drawing.Size(150, 31);
-            this.dtpFecha2.TabIndex = 5;
-            this.dtpFecha2.ValueChanged += new System.EventHandler(this.dtpFecha2_ValueChanged);
             // 
             // IdFuncion
             // 
@@ -161,10 +145,29 @@
             this.ColTotal.Name = "ColTotal";
             this.ColTotal.Width = 150;
             // 
-            // FrmRepFacturas
+            // dtpFecha1
+            // 
+            this.dtpFecha1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFecha1.Location = new System.Drawing.Point(172, 34);
+            this.dtpFecha1.Name = "dtpFecha1";
+            this.dtpFecha1.Size = new System.Drawing.Size(155, 31);
+            this.dtpFecha1.TabIndex = 4;
+            this.dtpFecha1.ValueChanged += new System.EventHandler(this.dtpFecha1_ValueChanged);
+            // 
+            // dtpFecha2
+            // 
+            this.dtpFecha2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFecha2.Location = new System.Drawing.Point(508, 35);
+            this.dtpFecha2.Name = "dtpFecha2";
+            this.dtpFecha2.Size = new System.Drawing.Size(150, 31);
+            this.dtpFecha2.TabIndex = 5;
+            this.dtpFecha2.ValueChanged += new System.EventHandler(this.dtpFecha2_ValueChanged);
+            // 
+            // FrmRepAgrupadoFunciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1022, 502);
             this.Controls.Add(this.dtpFecha2);
             this.Controls.Add(this.dtpFecha1);
@@ -172,7 +175,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnFiltrar);
-            this.Name = "FrmRepFacturas";
+            this.Name = "FrmRepAgrupadoFunciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Facturas";
             this.Load += new System.EventHandler(this.FrmRepFacturas_Load);

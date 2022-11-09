@@ -72,12 +72,14 @@
             // 
             // btnAcceder
             // 
+            this.btnAcceder.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnAcceder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAcceder.Location = new System.Drawing.Point(188, 197);
             this.btnAcceder.Name = "btnAcceder";
             this.btnAcceder.Size = new System.Drawing.Size(205, 36);
             this.btnAcceder.TabIndex = 3;
             this.btnAcceder.Text = "Iniciar Sesión";
-            this.btnAcceder.UseVisualStyleBackColor = true;
+            this.btnAcceder.UseVisualStyleBackColor = false;
             this.btnAcceder.Click += new System.EventHandler(this.btnAcceder_Click);
             // 
             // chkMostrar
@@ -95,6 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(541, 279);
             this.Controls.Add(this.chkMostrar);
             this.Controls.Add(this.btnAcceder);

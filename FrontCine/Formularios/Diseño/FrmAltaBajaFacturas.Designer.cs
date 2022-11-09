@@ -46,38 +46,45 @@
             // 
             // btnAlta
             // 
+            this.btnAlta.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnAlta.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAlta.Location = new System.Drawing.Point(73, 496);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(129, 59);
             this.btnAlta.TabIndex = 1;
             this.btnAlta.Text = "Dar de Alta";
-            this.btnAlta.UseVisualStyleBackColor = true;
+            this.btnAlta.UseVisualStyleBackColor = false;
             this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
             // 
             // btnBaja
             // 
+            this.btnBaja.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnBaja.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBaja.Location = new System.Drawing.Point(283, 496);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(129, 59);
             this.btnBaja.TabIndex = 2;
             this.btnBaja.Text = "Dar de Baja";
-            this.btnBaja.UseVisualStyleBackColor = true;
+            this.btnBaja.UseVisualStyleBackColor = false;
             this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSalir.Location = new System.Drawing.Point(1222, 496);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(129, 53);
             this.btnSalir.TabIndex = 3;
             this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // FrmAltaBajaFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1400, 600);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnBaja);

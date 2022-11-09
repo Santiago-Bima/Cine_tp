@@ -271,27 +271,27 @@ as
 create proc [dbo].[Reportes_funciones]
 @genero varchar(100)
 as
-select titulo Titulo, idioma Idioma, fu.fecha Fecha, hora Hora, idioma Idioma, formato Formato,genero Genero, count(distinct fa.nro_factura) 'Cantidad de entradas vendidas' from funciones fu join peliculas p on p.id_pelicula = fu.id_pelicula
+select titulo Titulo, idioma Idioma, CONVERT(varchar,fu.fecha,3) as [DD/MM/YY], hora Hora, idioma Idioma, formato Formato,genero Genero, count(distinct fa.nro_factura) 'Cantidad de entradas vendidas' from funciones fu join peliculas p on p.id_pelicula = fu.id_pelicula
 join idiomas i on i.id_idioma = p.id_idioma
 join formatos fr on fr.id_formato = fu.id_formato
 join detalle_facturas d on d.id_funcion = fu.id_funcion
 join facturas fa on fa.nro_factura = d.nro_factura
 join generos g on g.id_genero = p.id_genero
 where g.id_genero = @genero
-group by titulo, idioma, fu.fecha, hora, idioma, formato, genero
+group by titulo, idioma, CONVERT(varchar,fu.fecha,3), hora, idioma, formato, genero
 
 create proc Reportes_Facturas
 @año1 int,
 @año2 int
 as
-select distinct(fu.id_funcion) 'ID de funcion', titulo Pelicula,idioma Idioma, genero Genero, formato Formato, year(fa.fecha) Fecha ,sum(total) 'Total vendido' from facturas fa join detalle_facturas d on d.nro_factura = fa.nro_factura
+select distinct(fu.id_funcion) 'ID de funcion', titulo Pelicula,idioma Idioma, genero Genero, formato Formato, CONVERT(varchar,fa.fecha,3) as [DD/MM/YY],sum(total) 'Total vendido' from facturas fa join detalle_facturas d on d.nro_factura = fa.nro_factura
 join funciones fu on fu.id_funcion = d.id_funcion
 join peliculas p on p.id_pelicula = fu.id_pelicula
 join idiomas i on i.id_idioma = p.id_idioma
 join generos g on g.id_genero = p.id_genero
 join formatos fr on fr.id_formato = fu.id_formato
 where year(fa.fecha) between @año1 and @año2
-group by  fu.id_funcion ,titulo,idioma,genero,formato,year(fa.fecha)
+group by  fu.id_funcion ,titulo,idioma,genero,formato,CONVERT(varchar,fa.fecha,3)
 
 
 create proc Consultar_Lista_Funciones

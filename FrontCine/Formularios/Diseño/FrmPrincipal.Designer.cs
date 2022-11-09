@@ -48,6 +48,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
@@ -72,15 +73,17 @@
             // 
             // cerrarSesiónToolStripMenuItem
             // 
+            this.cerrarSesiónToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
-            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
+            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
             this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
+            this.salirToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -94,8 +97,9 @@
             // 
             // funcionesToolStripMenuItem
             // 
+            this.funcionesToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.funcionesToolStripMenuItem.Name = "funcionesToolStripMenuItem";
-            this.funcionesToolStripMenuItem.Size = new System.Drawing.Size(193, 34);
+            this.funcionesToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.funcionesToolStripMenuItem.Text = "Funciones";
             this.funcionesToolStripMenuItem.Click += new System.EventHandler(this.funcionesToolStripMenuItem_Click);
             // 
@@ -110,15 +114,17 @@
             // 
             // nuevaToolStripMenuItem
             // 
+            this.nuevaToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.nuevaToolStripMenuItem.Name = "nuevaToolStripMenuItem";
-            this.nuevaToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
+            this.nuevaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.nuevaToolStripMenuItem.Text = "Nueva";
             this.nuevaToolStripMenuItem.Click += new System.EventHandler(this.nuevaToolStripMenuItem_Click);
             // 
             // darDeAltaBajaToolStripMenuItem
             // 
+            this.darDeAltaBajaToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.darDeAltaBajaToolStripMenuItem.Name = "darDeAltaBajaToolStripMenuItem";
-            this.darDeAltaBajaToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
+            this.darDeAltaBajaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.darDeAltaBajaToolStripMenuItem.Text = "Dar de Alta / Baja";
             this.darDeAltaBajaToolStripMenuItem.Click += new System.EventHandler(this.darDeAltaBajaToolStripMenuItem_Click);
             // 
@@ -132,6 +138,7 @@
             // 
             // funcionesToolStripMenuItem1
             // 
+            this.funcionesToolStripMenuItem1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.funcionesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.conCriterioDeAgrupamientoToolStripMenuItem,
             this.simplesToolStripMenuItem});
@@ -142,6 +149,7 @@
             // 
             // conCriterioDeAgrupamientoToolStripMenuItem
             // 
+            this.conCriterioDeAgrupamientoToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.conCriterioDeAgrupamientoToolStripMenuItem.Name = "conCriterioDeAgrupamientoToolStripMenuItem";
             this.conCriterioDeAgrupamientoToolStripMenuItem.Size = new System.Drawing.Size(353, 34);
             this.conCriterioDeAgrupamientoToolStripMenuItem.Text = "Con Criterio de Agrupamiento";
@@ -149,6 +157,7 @@
             // 
             // simplesToolStripMenuItem
             // 
+            this.simplesToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.simplesToolStripMenuItem.Name = "simplesToolStripMenuItem";
             this.simplesToolStripMenuItem.Size = new System.Drawing.Size(353, 34);
             this.simplesToolStripMenuItem.Text = "Simples";
@@ -164,8 +173,9 @@
             // 
             // quienesSomosToolStripMenuItem
             // 
+            this.quienesSomosToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.quienesSomosToolStripMenuItem.Name = "quienesSomosToolStripMenuItem";
-            this.quienesSomosToolStripMenuItem.Size = new System.Drawing.Size(239, 34);
+            this.quienesSomosToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.quienesSomosToolStripMenuItem.Text = "Quienes Somos";
             this.quienesSomosToolStripMenuItem.Click += new System.EventHandler(this.quienesSomosToolStripMenuItem_Click);
             // 
@@ -173,6 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
